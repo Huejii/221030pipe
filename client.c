@@ -1,5 +1,3 @@
-// C program to implement one side of FIFO
-// This side writes first, then reads
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
@@ -12,37 +10,61 @@ int main()
     printf("Hello Client");
     int fd;
 
-    // FIFO file path
-    char * myfifo = "/tmp/myfifo";
+    // FIFO path
+    char * fifo1 = "/tmp/fifo1";
+    char * fifo2 = "/tmp/fifo2";
 
-    // Creating the named file(FIFO)
-    // mkfifo(<pathname>, <permission>)
-    mkfifo(myfifo, 0666);
-
-    char arr1[80], arr2[80];
+    char temp[512];
     while (1)
     {
-        // Open FIFO for write only
-        fd = open(myfifo, O_WRONLY);
 
-        // Take an input arr2ing from user.
-        // 80 is maximum length
-        fgets(arr2, 80, stdin);
+        
 
-        // Write the input arr2ing on FIFO
-        // and close it
-        write(fd, arr2, strlen(arr2)+1);
+        // FIFO 쓰기 전용으로 열기 (서버로 보내기)
+        fd = open(fifo1, O_WRONLY);
+
+        /*
+         TODO 유저에게 묻기로 수정 시작
+            1. 파일명 묻기
+            2. R || W 여부 묻기
+            3. R일 경우 읽을 바이트 수 묻기 (int 형식으로 받는다)
+            4. W일 경우 작성할 스트링 받기 (char* 형식으로 받는다)
+        */
+
+        temp = "";
+
+        printf("Filename:");
+        fgets(temp, 512, stdin);
+        write(fd, temp, strlen(temp)+1);
+       
+        temp = "";
+
+        printf("R/W:");
+        fgets(temp, 512, stdin);
+        write(fd, temp, strlen(temp)+1);
+   
+        temp = "";
+
+        printf("Byte size:");
+        fgets(temp, 512, stdin);
+        write(fd, temp, strlen(temp)+1);
+     
+        temp = "";
+  
+//쓰기전용으로 열었던 FIFO 닫기
         close(fd);
+
+
 
         // Open FIFO for Read only
-        fd = open(myfifo, O_RDONLY);
+        fd2 = open(fifo2, O_RDONLY);
 
         // Read from FIFO
-        read(fd, arr1, sizeof(arr1));
+        read(fd2, temp, sizeof(temp));
 
         // Print the read message
-        printf("User2: %s\n", arr1);
-        close(fd);
+        printf("Server sent: %s\n", temp);
+        close(fd2);
     }
     return 0;
 }
