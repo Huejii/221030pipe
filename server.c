@@ -8,7 +8,8 @@
 int main()
 {
     printf("Hello Server");
-    int fd1;
+    int fd;
+    int fd2;
 
     // FIFO path
     char * fifo1 = "/tmp/fifo1";
@@ -27,16 +28,16 @@ int main()
 
         // First open in read only and read
         fd1 = open(fifo1,O_RDONLY);
-        read(fd1, filename, 512);
+        read(fd, filename, 512);
         printf("read1: %s\n", filename);
 
-        read(fd1, rwType, 2);
+        read(fd, rwType, 2);
         printf("read2: %s\n", rwType);
 
-        read(fd1, readByteSize, 512);
+        read(fd, readByteSize, 512);
         printf("read2: %s\n", readByteSize);
         
-        close(fd1);
+        close(fd);
 
         // Now open in write mode and write
         // string taken from user.

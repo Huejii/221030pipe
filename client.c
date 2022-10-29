@@ -9,6 +9,7 @@ int main()
 {
     printf("Hello Client");
     int fd;
+    int fd2;
 
     // FIFO path
     char * fifo1 = "/tmp/fifo1";
@@ -50,6 +51,8 @@ int main()
         fd2 = open(fifo2, O_RDONLY);
 
         // Read from FIFO
+
+        char temp[512];
         read(fd2, temp, sizeof(temp));
 
         // Print the read message
