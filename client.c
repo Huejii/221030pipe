@@ -34,13 +34,11 @@ int main()
         char readByteSize[512] = "";
 
         printf("Filename:");
-        //fgets(filename, 512, stdin);
-        fgets(filename, strlen(filename), stdin);
+        fgets(filename, 512, stdin);
 
         printf("R/W:");
         fgets(rwType, 512, stdin);
 
-        filename[strlen(filename) - 1] = '\0';
         if(rwType == "W")
         {
             fd = open(fifo1, O_WRONLY);
