@@ -27,7 +27,7 @@ int main()
         char readByteSize[512] = "";
 
         // First open in read only and read
-        fd1 = open(fifo1,O_RDONLY);
+        fd = open(fifo1,O_RDONLY);
         read(fd, filename, 512);
         printf("read1: %s\n", filename);
 
