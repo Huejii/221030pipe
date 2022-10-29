@@ -33,18 +33,32 @@ int main()
         char readByteSize[512] = "";
 
         printf("Filename:");
-        fgets(filename, 512, stdin);
-        write(fd, filename, strlen(filename)+1);
+        //fgets(filename, 512, stdin);
+        fgets(filename, strlen(filename), stdin);
+        filename[strlen(filename) - 1] = '\0';
 
         printf("R/W:");
-        fgets(rwType, 512, stdin);
-        write(fd, rwType, strlen(rwType)+1);
+        fgets(rwType, 512, stdin);        
 
-        printf("Write String:");
-        fgets(writeString, 512, stdin);
-        write(fd, writeString, strlen(writeString)+1);
-     
-        //쓰기전용으로 열었던 FIFO 닫기
+        if(rwType == "W")
+        {
+            fd = open(fifo1, O_WRONLY);
+            write(fd, filename, strlen(filename)+1);
+            write(fd, rwType, strlen(rwType)+1);
+            printf("Write String:");
+            fgets(writeString, 512, stdin);
+            write(fd, writeString, strlen(writeString)+1);
+        } else if (rwType == "R")
+        {
+            fd2 = open(fifo2, O_RDONLY);
+            write(fd2, filename, strlen(filename)+1);
+            write(fd2, rwType, strlen(rwType)+1);
+            printf("Byte Size:");
+            fgets(readByteSize, 512, stdin);
+            write(fd2, readByteSize, strlen(readByteSize)+1);
+        } else
+            exit(1);
+        //FIFO 닫기
         close(fd);
 
         // Open FIFO for Read only

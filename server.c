@@ -30,13 +30,20 @@ int main()
         // First open in read only and read
         fd = open(fifo1,O_RDONLY);
         read(fd, filename, 512);
-        printf("read1: %s\n", filename);
+        printf("file name: %s\n", filename);
 
         read(fd, rwType, 512);
-        printf("read2: %s\n", rwType);
+        printf("rw Type: %s\n", rwType);
 
-        read(fd, writeString, 512);
-        printf("read3: %s\n", writeString);
+        if(rwType == "R")
+        {
+            read(fd, readByteSize, 512);
+            printf("Byte Size: %s\n",readByteSize);
+        } else
+        {
+            read(fd, writeString, 512);
+            printf("Write String: %s\n", writeString);
+        }
 
         FILE *fp;
 	    fp = fopen(filename, "w");
