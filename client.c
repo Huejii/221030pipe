@@ -37,7 +37,7 @@ int main()
         write(fd, filename, strlen(filename)+1);
 
         printf("R/W:");
-        fgets(rwType, 512, stdin);
+        fgets(rwType, 2, stdin);
         write(fd, rwType, strlen(rwType)+1);
 
         printf("Byte size:");
