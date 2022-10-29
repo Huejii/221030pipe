@@ -68,10 +68,10 @@ void client(int readfd, int writefd)
 	if (buff[len - 1] == '\n')
 		len--;
 
-	fwrite(writefd, buff, len);
+	fwrite(writefd, buff);
 
 	while ((n = fread(readfd, buff, MAXLINE)) > 0)
-		fwrite(STDOUT_FILENO, buff, n);
+		fwrite(STDOUT_FILENO, buff);
 }
 
 void server(int readfd, int writefd)
@@ -91,12 +91,12 @@ void server(int readfd, int writefd)
 	{
 		snprintf(buff + n, sizeof(buff) - n, ": can't open, %s\n", strerror(errno));
 		n = strlen(buff);
-		fwrite(writefd, buff, n);
+		fwrite(writefd, buff);
 	}
 	else
 	{
 		while ((n = fread(fd, buff, MAXLINE)) > 0)
-			fwrite(writefd, buff, n);
+			fwrite(writefd, buff);
 		close(fd);
 
 	}
