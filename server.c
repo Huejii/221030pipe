@@ -9,6 +9,7 @@
 
 int main()
 {
+    printf("Hello Server");
     int fd1;
 
     // FIFO file path
