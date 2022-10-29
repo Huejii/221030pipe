@@ -5,8 +5,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-bool writeFile(char)
-
 
 int main()
 {
