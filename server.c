@@ -39,7 +39,7 @@ int main()
         printf("read3: %s\n", writeString);
 
         FILE *fp;
-	    fopen(&fp, filename, "w");
+	    fp = fopen(filename, "w");
 	    fputs(writeString, fp);
         fclose(fp);
         
