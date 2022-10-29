@@ -7,7 +7,6 @@
 
 int main()
 {
-    printf("Hello Server");
     int fd;
     int fd2;
 
@@ -23,7 +22,7 @@ int main()
     while (1)
     {
         char filename[512] = "";
-        char rwType[2] = "";
+        char rwType[512] = "";
         char readByteSize[512] = "";
 
         // First open in read only and read
@@ -31,11 +30,11 @@ int main()
         read(fd, filename, 512);
         printf("read1: %s\n", filename);
 
-        read(fd, rwType, 2);
+        read(fd, rwType, 512);
         printf("read2: %s\n", rwType);
 
         read(fd, readByteSize, 512);
-        printf("read2: %s\n", readByteSize);
+        printf("read3: %s\n", readByteSize);
         
         close(fd);
 

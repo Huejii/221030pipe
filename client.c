@@ -7,7 +7,6 @@
 
 int main()
 {
-    printf("Hello Client");
     int fd;
     int fd2;
 
@@ -29,7 +28,7 @@ int main()
         */
 
         char filename[512] = "";
-        char rwType[2] = "";
+        char rwType[512] = "";
         char readByteSize[512] = "";
 
         printf("Filename:");
@@ -37,7 +36,7 @@ int main()
         write(fd, filename, strlen(filename)+1);
 
         printf("R/W:");
-        fgets(rwType, 2, stdin);
+        fgets(rwType, 512, stdin);
         write(fd, rwType, strlen(rwType)+1);
 
         printf("Byte size:");
