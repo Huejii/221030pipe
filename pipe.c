@@ -2,6 +2,7 @@
 #include <fcntl.h> 
 #include <errno.h> 
 #include <string.h> 
+#include <stdlib.h> 
 #include <sys/types.h> 
 #include <sys/stat.h> 
 
@@ -67,10 +68,10 @@ void client(int readfd, int writefd)
 	if (buff[len - 1] == '\n')
 		len--;
 
-	write(writefd, buff, len);
+	fwrite(writefd, buff, len);
 
-	while ((n = read(readfd, buff, MAXLINE)) > 0)
-		write(STDOUT_FILENO, buff, n);
+	while ((n = fread(readfd, buff, MAXLINE)) > 0)
+		fwrite(STDOUT_FILENO, buff, n);
 }
 
 void server(int readfd, int writefd)
@@ -79,7 +80,7 @@ void server(int readfd, int writefd)
 	size_t n;
 	char buff[MAXLINE + 1];
 
-	if ((n = read(readfd, buff, MAXLINE)) == 0)
+	if ((n = fread(readfd, buff, MAXLINE)) == 0)
 	{
 		printf("end-of-file");
 		exit(0);
@@ -90,12 +91,12 @@ void server(int readfd, int writefd)
 	{
 		snprintf(buff + n, sizeof(buff) - n, ": can't open, %s\n", strerror(errno));
 		n = strlen(buff);
-		write(writefd, buff, n);
+		fwrite(writefd, buff, n);
 	}
 	else
 	{
-		while ((n = read(fd, buff, MAXLINE)) > 0)
-			write(writefd, buff, n);
+		while ((n = fread(fd, buff, MAXLINE)) > 0)
+			fwrite(writefd, buff, n);
 		close(fd);
 
 	}
