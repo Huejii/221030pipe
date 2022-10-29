@@ -19,20 +19,22 @@ int main()
     mkfifo(fifo1, 0666);
     mkfifo(fifo2, 0666);
 
-    char temp[512], str2[80];
     while (1)
     {
+        char filename[512] = "";
+        char rwType[2] = "";
+        char readByteSize[512] = "";
+
         // First open in read only and read
         fd1 = open(fifo1,O_RDONLY);
-        read(fd1, temp, 512);
+        read(fd1, filename, 512);
+        printf("read1: %s\n", filename);
 
-        //처음으로 받는게 파일네임
-        temp = "";
-        printf("read1: %s\n", temp);
-        temp = "";
-        printf("read2: %s\n", temp);
-        temp = "";
-        printf("read3: %s\n", temp);
+        read(fd1, rwType, 2);
+        printf("read2: %s\n", rwType);
+
+        read(fd1, readByteSize, 512);
+        printf("read2: %s\n", readByteSize);
         
         close(fd1);
 
@@ -41,7 +43,7 @@ int main()
         fd2 = open(fifo2,O_WRONLY);
        
 
-       temp = "okay";
+        char temp[512] = "okay";
         write(fd2, temp, strlen(temp)+1);
         close(fd2);
     }

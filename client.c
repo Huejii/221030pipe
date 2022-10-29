@@ -14,12 +14,8 @@ int main()
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
 
-    char temp[512];
     while (1)
     {
-
-        
-
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         fd = open(fifo1, O_WRONLY);
 
@@ -31,30 +27,24 @@ int main()
             4. W일 경우 작성할 스트링 받기 (char* 형식으로 받는다)
         */
 
-        temp = "";
+        char filename[512] = "";
+        char rwType[2] = "";
+        char readByteSize[512] = "";
 
         printf("Filename:");
-        fgets(temp, 512, stdin);
-        write(fd, temp, strlen(temp)+1);
-       
-        temp = "";
+        fgets(filename, 512, stdin);
+        write(fd, filename, strlen(filename)+1);
 
         printf("R/W:");
-        fgets(temp, 512, stdin);
-        write(fd, temp, strlen(temp)+1);
-   
-        temp = "";
+        fgets(rwType, 512, stdin);
+        write(fd, rwType, strlen(rwType)+1);
 
         printf("Byte size:");
-        fgets(temp, 512, stdin);
-        write(fd, temp, strlen(temp)+1);
+        fgets(readByteSize, 512, stdin);
+        write(fd, readByteSize, strlen(readByteSize)+1);
      
-        temp = "";
-  
-//쓰기전용으로 열었던 FIFO 닫기
+        //쓰기전용으로 열었던 FIFO 닫기
         close(fd);
-
-
 
         // Open FIFO for Read only
         fd2 = open(fifo2, O_RDONLY);
