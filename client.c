@@ -29,6 +29,7 @@ int main()
 
         char filename[512] = "";
         char rwType[512] = "";
+        char writeString[512] = "";
         char readByteSize[512] = "";
 
         printf("Filename:");
@@ -39,9 +40,9 @@ int main()
         fgets(rwType, 512, stdin);
         write(fd, rwType, strlen(rwType)+1);
 
-        printf("Byte size:");
-        fgets(readByteSize, 512, stdin);
-        write(fd, readByteSize, strlen(readByteSize)+1);
+        printf("Write String:");
+        fgets(writeString, 512, stdin);
+        write(fd, writeString, strlen(writeString)+1);
      
         //쓰기전용으로 열었던 FIFO 닫기
         close(fd);

@@ -5,6 +5,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+bool writeFile(char)
+
+
 int main()
 {
     int fd;
@@ -23,6 +26,7 @@ int main()
     {
         char filename[512] = "";
         char rwType[512] = "";
+        char writeString[512] = "";
         char readByteSize[512] = "";
 
         // First open in read only and read
@@ -33,8 +37,13 @@ int main()
         read(fd, rwType, 512);
         printf("read2: %s\n", rwType);
 
-        read(fd, readByteSize, 512);
-        printf("read3: %s\n", readByteSize);
+        read(fd, writeString, 512);
+        printf("read3: %s\n", writeString);
+
+        FILE *fp;
+	    fopen_s(&fp, filename, "w");
+	    fputs(writeString, fp);
+        fclose(fp);
         
         close(fd);
 
