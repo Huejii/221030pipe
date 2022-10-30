@@ -19,7 +19,6 @@ int main()
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         fd = open(fifo1, O_WRONLY);
-        fd2 = open(fifo2, O_RDONLY);
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
@@ -37,17 +36,19 @@ int main()
 
         printf("Filename:");
         fgets(filename, 512, stdin);
-        write(fd2, filename, strlen(filename));
+        write(fd, filename, strlen(filename));
 
         printf("R/W:");
         fgets(rwType, 512, stdin);
-        write(fd2, rwType, strlen(rwType)+1);
+        write(fd, rwType, strlen(rwType)+1);
 
         if (rwType == "R")
         {
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
-            write(fd2, readByteSize, strlen(readByteSize)+1);
+            write(fd, readByteSize, strlen(readByteSize)+1);
+            close(fd);
+            fd2 = open(fifo2, O_RDONLY);
             read(fd2, getFileString,  strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
         } else if (rwType == "W")
@@ -57,13 +58,14 @@ int main()
             printf("Write String:");
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
+            close(fd);
             // 추가 필요: read 쓴 데이터 string길이 받기
+            fd2 = open(fifo2, O_RDONLY);
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Write Success Byte Size: %s\n", writeByte);
         } else
             exit(1);
         //FIFO 닫기
-        close(fd);
 
         // Open FIFO for Read only
         //fd2 = open(fifo2, O_RDONLY);
