@@ -13,23 +13,23 @@ int main()
     /* fifo descriptor */
     int fd;
     int fd2;
-
-    unlink(fifo1);
-    unlink(fifo2);
     /* client와 IPC할 Read, write할 FIFO 경로 2개 초기화 */
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
     pid_t pid;
 
     /* FIFO 경로에 FIFO 생성 (성공시 0 반환, 실패시 -1 반환) */
-    if (mkfifo(fifo1, 0666) == -1) {
-        fprintf(stderr, "Pipe Failed");
-        return 1;
-    }
-    if (mkfifo(fifo2, 0666) == -1) {
-        fprintf(stderr, "Pipe Failed");
-        return 1;
-    }
+    // if (mkfifo(fifo1, 0666) == -1) {
+    //     fprintf(stderr, "Pipe Failed");
+    //     return 1;
+    // }
+    // if (mkfifo(fifo2, 0666) == -1) {
+    //     fprintf(stderr, "Pipe Failed");
+    //     return 1;
+    // }
+    mkfifo(fifo1, 0666);
+    mkfifo(fifo2, 0666);
+
 
     /* IPC 과정 반복 실행 */
     while (1)
