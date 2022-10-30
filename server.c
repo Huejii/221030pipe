@@ -11,8 +11,6 @@
 
 int main()
 {
-    // 추가필요: child fork하기
-
     int fd;
     int fd2;
 
@@ -21,23 +19,12 @@ int main()
     char * fifo2 = "/tmp/fifo2";
     pid_t pid;
 
-    // Creating the named FIFP
-    // mkfifo(<pathname>,<permission>)
+    // Creating the named FIFO
     mkfifo(fifo1, 0666);
     mkfifo(fifo2, 0666);
 
     while (1)
     {
-        // if(fd = open(fifo1, O_RDONLY) < 0)
-        // {
-        //     perror("open error : ");
-        //     exit(0);
-        // }
-        // if(fd2 = open(fifo2, O_WRONLY) < 0)
-        // {
-        //     perror("open error : ");
-        //     exit(0);
-        // }
         fd = open(fifo1,O_RDONLY);
         fd2 = open(fifo2,O_WRONLY);
         if (fd == -1) {
@@ -56,13 +43,14 @@ int main()
         char readByteSize[512] = "";
         char writeByte[512]="";
         char getFileString[512]="";
-
-        // First open in read only and read
-        //fd = open(fifo1,O_RDONLY);
-        //read(fd, filename, 512);
-        //printf("file name: %s\n", filename);
+        char temp[512] = "";
 
         read(fd, filename, 512);
+        if(!filename)
+        {
+            printf("프로그램을 종료합니다.");
+            break;
+        }
         printf("read file name: %s\n", filename);
 
 
@@ -99,10 +87,9 @@ int main()
                 sprintf(writeByte, "%ld", strlen(writeString));
                 printf("Write String Byte Size: %s\n", writeByte);
                 write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
-
-                char temp[512] = "okay";
                 write(fd2, temp, strlen(temp)+1);
-            } else
+            }
+            else
             {
                 printf("오류\n");
             }
@@ -112,7 +99,7 @@ int main()
             close(fd);
             close(fd2);
 
-            sleep(5);
+            exit(0);
         }
         else
         {
@@ -123,36 +110,6 @@ int main()
             printf("Child Complete");
             exit(0);
         }
-
-
-        // if(strcmp(rwType,"R")==0)
-        // {
-        //     read(fd, readByteSize, 512);
-        //     printf("read Byte Size: %s\n",readByteSize);
-	    //     fp = fopen(filename, "r");
-        //     //아래 추가: 바이트 수 만큼 파일읽고 읽은 것 write하기
-        //     fread(getFileString, atoi(readByteSize), 1, fp);
-        //     printf("Success get String: %s\n", getFileString);
-        //     write(fd2, getFileString,  strlen(getFileString)+1);
-
-        // } 
-        // else if(strcmp(rwType,"W")==0)
-        // {
-        //     read(fd, writeString, 512);
-        //     printf("Write String: %s\n", writeString);
-	    //     fp = fopen(filename, "w");
-	    //     fputs(writeString, fp);
-        //     //아래 추가: write string 바이트 write하기
-        //     sprintf(writeByte, "%ld", strlen(writeString));
-        //     printf("Write String Byte Size: %s\n", writeByte);
-        //     write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
-
-        //     char temp[512] = "okay";
-        //     write(fd2, temp, strlen(temp)+1);
-        // } else
-        // {
-        //     printf("오류\n");
-        // }
     }
     return 0;
 }
