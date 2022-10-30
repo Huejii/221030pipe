@@ -11,11 +11,9 @@ int main()
     /* fifo descriptor */
     int fd;
     int fd2;
-
     /* 서버와 IPC할 Read, write할 FIFO 경로 2개 초기화 */
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
-
     /* IPC 과정 반복 실행 */
     while (1)
     {
@@ -26,9 +24,19 @@ int main()
             fprintf(stderr, "Pipe Failed");
             return 1;
         }
-        char getFileString[512]="";
-        char temp[512];
+        if (fd2 == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
 
+        char filename[512] = "";      // 파일명
+        char rwType[512] = "";        // Read/Write 타입
+        char writeString[512] = "";   // 사용자가 write할 데이터 string
+        char writeByte[512]="";       // 사용자가 Write힌 데이터 byte 수 
+        char readByteSize[512] = "";  // 사용자가 read 요청한 데이터 byte 수
+        char getFileString[512]="";   // 사용자가 read 요청한 데이터 string
+        char temp[512] = "";
+        
         /* 파일명 입력 받기 */
         printf("Filename:");
         fgets(filename, 512, stdin);
@@ -41,13 +49,11 @@ int main()
             printf("filename 입력 오류\n");
             break;
         }
-
         /*read write 여부 입력 받기*/
         printf("R/W:");
         fgets(rwType, 512, stdin);
         rwType[strlen(rwType) - 1] = '\0'; // 개행문자 제거
         write(fd, rwType, strlen(rwType)+1); // server에 보낼 rw type write
-
         if (strcmp(rwType,"R")==0)
         {
             /* 파일 엑세스 타입이 Read일 때 */
@@ -67,7 +73,6 @@ int main()
             write(fd, writeString, strlen(writeString)+1); // 서버로 보낼 피일에 쓸 데이터 string write
             read(fd2, writeByte,  strlen(writeByte)+1); // 파일에 쓴 데이터 byte수 read
             printf("Success Write Byte Size: %s", writeByte); // 파일에 쓴 데이터 byte수 출력
-
             read(fd2, temp, sizeof(temp)); //
             printf("%s\n", temp); //
         }else
@@ -76,8 +81,9 @@ int main()
             printf("RWtype 오류");
             exit(1);
         }
-
         /*FIFO close*/
         close(fd);
         close(fd2);
     }
+    return 0;
+}
