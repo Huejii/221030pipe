@@ -21,15 +21,15 @@ int main()
     {
         /* FIFO open. client는 fifo1에서 write only, fifo2에서 read only */
         fd = open(fifo1, O_WRONLY);
-        fd2 = open(fifo2, O_RDONLY);
-        if (fd == -1) {
-            fprintf(stderr, "Pipe Failed");
-            return 1;
-        }
-        if (fd2 == -1) {
-            fprintf(stderr, "Pipe Failed");
-            return 1;
-        }
+        // fd2 = open(fifo2, O_RDONLY);
+        // if (fd == -1) {
+        //     fprintf(stderr, "Pipe Failed");
+        //     return 1;
+        // }
+        // if (fd2 == -1) {
+        //     fprintf(stderr, "Pipe Failed");
+        //     return 1;
+        // }
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
@@ -97,6 +97,9 @@ int main()
         /*FIFO close*/
         close(fd);
         close(fd2);
+
+        unlink(fifo1);
+        unlink(fifo2);
     }
     return 0;
 }
