@@ -37,6 +37,7 @@ int main()
         //     exit(0);
         // }
         fd = open(fifo1,O_RDONLY);
+        fd2 = open(fifo2,O_WRONLY);
 
         char filename[512] = "";
         char rwType[512] = "";
@@ -44,6 +45,7 @@ int main()
         char readByteSize[512] = "";
         char writeByte[512]="";
         char getFileString[512]="";
+        char wannaExit[10]="";
 
         // First open in read only and read
         //fd = open(fifo1,O_RDONLY);
@@ -62,8 +64,6 @@ int main()
         {
             read(fd, readByteSize, 512);
             printf("read Byte Size: %s\n",readByteSize);
-            close(fd);
-            fd2 = open(fifo2,O_WRONLY);
 	        fp = fopen(filename, "r");
             //아래 추가: 바이트 수 만큼 파일읽고 읽은 것 write하기
             fread(getFileString, atoi(readByteSize), 1, fp);
@@ -75,8 +75,6 @@ int main()
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
-            close(fd);
-            fd2 = open(fifo2,O_WRONLY);
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
             //아래 추가: write string 바이트 write하기
@@ -85,16 +83,18 @@ int main()
             write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
 
             char temp[512] = "okay";
-            write(fd2, temp, strlen(temp)+1);\
+            write(fd2, temp, strlen(temp)+1);
         } else
         {
             printf("오류\n");
         }
-            fclose(fp);
-            close(fd2);
-        // Now open in write mode and write
-        // string taken from user.
-        //fd2 = open(fifo2,O_WRONLY);
+        fclose(fp);
+
+        printf("종료여부: %s\n", wannaExit);
+        write(fd2, wannaExit, strlen(wannaExit)+1);
+
+        close(fd);
+        close(fd2);
     }
     return 0;
 }

@@ -10,13 +10,13 @@ int main()
 {
     int fd;
     int fd2;
-    int wannaExit=1;
+    int nonexit=1;
 
     // FIFO path
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
 
-    while (wannaExit)
+    while (nonExit)
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         // if(fd = open(fifo1, O_WRONLY) < 0)
@@ -30,6 +30,7 @@ int main()
         //     exit(0);
         // }
         fd = open(fifo1, O_WRONLY);
+        fd2 = open(fifo2, O_RDONLY);
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
@@ -45,6 +46,7 @@ int main()
         char writeByte[512]= "";
         char getFileString[512]="";
         char temp[512];
+        char wannaExit[10]="";
 
         printf("Filename:");
         fgets(filename, 512, stdin);
@@ -61,8 +63,6 @@ int main()
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd, readByteSize, strlen(readByteSize)+1);
-            close(fd);
-            fd2 = open(fifo2, O_RDONLY);
             read(fd2, getFileString, strlen(getFileString)+1);
             printf("Success get String: %s", getFileString);
             read(fd2, temp, sizeof(temp));
@@ -74,7 +74,6 @@ int main()
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
             // 아래 추가: read 쓴 데이터 string길이 받기
-            fd2 = open(fifo2, O_RDONLY);
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Success Write Byte Size: %s", writeByte);
             //이래는 오류땜에 추가
@@ -85,12 +84,15 @@ int main()
             printf("오류");
         }
 
-        // Print the read message
-        close(fd2);
-
-        int wannaExit;
+                int wannaExit;
         printf("종료하려면 0을 입력하세요:");
-        scanf("%d", &wannaExit);
+        fgets(wannaExit, 10, stdin);
+        write(fd, wannaExit, strlen(wannaExit)+1);
+        nonexit = atoi(wannaExit);
+        // Print the read message
+
+        close(fd);
+        close(fd2);
     }
     return 0;
 }
