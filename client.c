@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,16 +27,6 @@ int main()
             fprintf(stderr, "Pipe Failed");
             return 1;
         }
-        if (fd2 == -1) {
-            fprintf(stderr, "Pipe Failed");
-            return 1;
-        }
-
-        char filename[512] = "";
-        char rwType[512] = "";
-        char writeString[512] = "";
-        char readByteSize[512] = "";
-        char writeByte[512]= "";
         char getFileString[512]="";
         char temp[512];
 
@@ -91,5 +82,3 @@ int main()
         close(fd);
         close(fd2);
     }
-    return 0;
-}

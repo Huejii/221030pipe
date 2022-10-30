@@ -5,31 +5,28 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <sys/wait.h>
-
 
 int main()
 {
     /* fifo descriptor */
     int fd;
     int fd2;
+
     /* client와 IPC할 Read, write할 FIFO 경로 2개 초기화 */
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
     pid_t pid;
 
     /* FIFO 경로에 FIFO 생성 (성공시 0 반환, 실패시 -1 반환) */
-    if (mkfifo(fifo1, 0666) == -1) {
-        fprintf(stderr, "Pipe Failed");
+    if (mkfifo(fifo1, 0666) == -1) 
+    {
+        fprintf(stderr, "make fifo1 Failed");
         return 1;
     }
-    if (mkfifo(fifo2, 0666) == -1) {
-        fprintf(stderr, "Pipe Failed");
+    if (!mkfifo(fifo2, 0666) == -1) {
+        fprintf(stderr, "make fifo2 Failed");
         return 1;
     }
-    mkfifo(fifo1, 0666);
-    mkfifo(fifo2, 0666);
-
 
     /* IPC 과정 반복 실행 */
     while (1)
@@ -42,8 +39,6 @@ int main()
         if (fd == -1) {
             fprintf(stderr, "Pipe Failed");
             return 1;
-        }
-        if (fd2 == -1) {
             fprintf(stderr, "Pipe Failed");
             return 1;
         }
@@ -95,11 +90,7 @@ int main()
                 /* 파일 엑세스 타입이 Read일 때 */
                 read(fd, readByteSize, 512);   // 읽을 데이터 바이트 수 read
                 printf("read Byte Size: %s\n",readByteSize);   // read한 읽을 데이터 바이트 수 출력
-                if ( (fp = fopen(filename, "r")) == NULL) {
-                    fprintf(stderr, "존재하지 않는 파일입니다.\n");
-                    exit(1);
-                    exit(1);
-                }
+	            fp = fopen(filename, "r");     // read 용으로 파일 open
                 fread(getFileString, atoi(readByteSize), 1, fp);   // 파일로부터 readByteSize만큼 데이터 읽어 getFileString에 입력
                 printf("Success get String: %s\n", getFileString); // 읽기에 성공한 데이터 string 출력
                 write(fd2, getFileString,  strlen(getFileString)+1); // client에 보낼 데이터 string write
@@ -123,7 +114,13 @@ int main()
                 printf("R/W Type 입력 오류\n");
                 exit(1);
             }
-    
+            
+            /*파일 close*/
+            fclose(fp);
+
+            /*FIFO close*/
+            close(fd);
+            close(fd2);
         }
         // parent 수행(wait child)
         else
@@ -134,14 +131,5 @@ int main()
             printf("status %d\n", status); // status 출력
             printf("Child Complete\n");   // child 수행 및 응답 완료 메세지 출력
         }
-        /*파일 close*/
-        fclose(fp);
-
-        /*FIFO close*/
-        close(fd);
-        close(fd2);
-        unlink(fifo1);
-        unlink(fifo2);
     }
     return 0;
-}
