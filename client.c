@@ -70,6 +70,7 @@ int main()
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
             // 아래 추가: read 쓴 데이터 string길이 받기
+            printf("%d", strlen(writeByte));
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Write Success Byte Size: %s\n", writeByte);
         
