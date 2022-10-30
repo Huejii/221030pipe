@@ -21,7 +21,7 @@ int main()
     {
         /* FIFO open. client는 fifo1에서 write only, fifo2에서 read only */
         fd = open(fifo1, O_WRONLY);
-        // fd2 = open(fifo2, O_RDONLY);
+        fd2 = open(fifo2, O_RDONLY);
         // if (fd == -1) {
         //     fprintf(stderr, "Pipe Failed");
         //     return 1;
