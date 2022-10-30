@@ -86,6 +86,9 @@ int main()
             write(fd2, temp, strlen(temp)+1);
             close(fd);
             close(fd2);
+        } else
+        {
+            printf("오류");
         }
             fclose(fp);
         // Now open in write mode and write

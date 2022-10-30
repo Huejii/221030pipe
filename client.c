@@ -54,8 +54,7 @@ int main()
         fgets(rwType, 512, stdin);
         rwType[strlen(rwType) - 1] = '\0';
         write(fd, rwType, strlen(rwType)+1);
-
-        printf("WHY1\n");
+        
         if (rwType == "R")
         {
             printf("Byte Size:");
@@ -73,8 +72,10 @@ int main()
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Write Success Byte Size: %s\n", writeByte);
         
+        }else
+        {
+            printf("오류");
         }
-        printf("WHY2\n");
         char temp[512];
         read(fd2, temp, sizeof(temp));
 
