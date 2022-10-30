@@ -95,9 +95,15 @@ int main()
                 /* 파일 엑세스 타입이 Read일 때 */
                 read(fd, readByteSize, 512);   // 읽을 데이터 바이트 수 read
                 printf("read Byte Size: %s\n",readByteSize);   // read한 읽을 데이터 바이트 수 출력
-	            fp = fopen(filename, "r");     // read 용으로 파일 open
-                if (fp ==NULL) {
-                    printf("존재하지 않는 파일입니다.\n");
+	            // fp = fopen(filename, "r");     // read 용으로 파일 open
+                // if (fp == NULL) {
+                //     printf("존재하지 않는 파일입니다.\n");
+                //     exit(1);
+            
+                }
+                if ( (fp = fopen(filename, "r")) == NULL) {
+                    fprintf(stderr, "존재하지 않는 파일입니다.\n");
+                    exit(1);
                     exit(1);
                 }
                 fread(getFileString, atoi(readByteSize), 1, fp);   // 파일로부터 readByteSize만큼 데이터 읽어 getFileString에 입력
