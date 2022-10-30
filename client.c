@@ -83,8 +83,7 @@ int main()
         {
             printf("오류");
         }
-
-                int wannaExit;
+        
         printf("종료하려면 0을 입력하세요:");
         fgets(wannaExit, 10, stdin);
         write(fd, wannaExit, strlen(wannaExit)+1);
