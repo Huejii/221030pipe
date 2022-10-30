@@ -35,7 +35,7 @@ int main()
         char getFileString[512]="";
 
         printf("Filename:");
-        scanf_s("%s", filename, 512);
+        scanf("%s", filename, 512);
         write(fd, filename, strlen(filename));
 
         printf("R/W:");
@@ -61,7 +61,7 @@ int main()
             printf("Write String:");
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
-            
+
             close(fd);
             // 추가 필요: read 쓴 데이터 string길이 받기
             fd2 = open(fifo2, O_RDONLY);
