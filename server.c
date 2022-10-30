@@ -40,11 +40,11 @@ int main()
         // }
         fd = open(fifo1,O_RDONLY);
         fd2 = open(fifo2,O_WRONLY);
-        if (pipe(fd) == -1) {
+        if (fd == -1) {
             fprintf(stderr, "Pipe Failed");
             return 1;
         }
-        if (pipe(fd2) == -1) {
+        if (fd2 == -1) {
             fprintf(stderr, "Pipe Failed");
             return 1;
         }
