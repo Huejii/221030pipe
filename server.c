@@ -95,7 +95,6 @@ int main()
                 /* 파일 엑세스 타입이 Read일 때 */
                 read(fd, readByteSize, 512);   // 읽을 데이터 바이트 수 read
                 printf("read Byte Size: %s\n",readByteSize);   // read한 읽을 데이터 바이트 수 출력
-                }
                 if ( (fp = fopen(filename, "r")) == NULL) {
                     fprintf(stderr, "존재하지 않는 파일입니다.\n");
                     exit(1);
@@ -140,8 +139,9 @@ int main()
             wait(&status); // child 종료 wait
             printf("status %d\n", status); // status 출력
             printf("Child Complete\n");   // child 수행 및 응답 완료 메세지 출력
-            unlink(fifo1);
-            unlink(fifo2);
         }
+        unlink(fifo1);
+        unlink(fifo2);
+    }
     return 0;
 }

@@ -22,21 +22,14 @@ int main()
         /* FIFO open. client는 fifo1에서 write only, fifo2에서 read only */
         fd = open(fifo1, O_WRONLY);
         fd2 = open(fifo2, O_RDONLY);
-        // if (fd == -1) {
-        //     fprintf(stderr, "Pipe Failed");
-        //     return 1;
-        // }
-        // if (fd2 == -1) {
-        //     fprintf(stderr, "Pipe Failed");
-        //     return 1;
-        // }
-        /*
-         TODO 유저에게 묻기로 수정 시작
-            1. 파일명 묻기
-            2. R || W 여부 묻기
-            3. R일 경우 읽을 바이트 수 묻기 (int 형식으로 받는다)
-            4. W일 경우 작성할 스트링 받기 (char* 형식으로 받는다)
-        */
+        if (fd == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
+        if (fd2 == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
 
         char filename[512] = "";
         char rwType[512] = "";
