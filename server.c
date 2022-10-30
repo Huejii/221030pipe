@@ -123,13 +123,7 @@ int main()
                 printf("R/W Type 입력 오류\n");
                 exit(1);
             }
-            
-            /*파일 close*/
-            fclose(fp);
-
-            /*FIFO close*/
-            close(fd);
-            close(fd2);
+    
         }
         // parent 수행(wait child)
         else
@@ -140,6 +134,12 @@ int main()
             printf("status %d\n", status); // status 출력
             printf("Child Complete\n");   // child 수행 및 응답 완료 메세지 출력
         }
+        /*파일 close*/
+        fclose(fp);
+
+        /*FIFO close*/
+        close(fd);
+        close(fd2);
         unlink(fifo1);
         unlink(fifo2);
     }
