@@ -18,7 +18,17 @@ int main()
     while (1)
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
-        fd = open(fifo1, O_WRONLY);
+        if(fd = open(fifo1, O_WRONLY) < 0)
+        {
+            perror("open error : ");
+            exit(0);
+        }
+        if(fd2 = open(fifo2, O_RDONLY) < 0)
+        {
+            perror("open error : ");
+            exit(0);
+        }
+        //fd = open(fifo1, O_WRONLY);
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
@@ -36,6 +46,7 @@ int main()
 
         printf("Filename:");
         fgets(filename, 512, stdin);
+        filename[strlen(filename) - 1] = '\0';
         write(fd, filename, strlen(filename)+1);
 
         printf("R/W:");
@@ -50,7 +61,7 @@ int main()
 
             close(fd);
 
-            fd2 = open(fifo2, O_RDONLY);
+            //fd2 = open(fifo2, O_RDONLY);
             read(fd2, getFileString,  strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
         } else if (rwType == "W")
@@ -64,7 +75,7 @@ int main()
 
             close(fd);
             // 추가 필요: read 쓴 데이터 string길이 받기
-            fd2 = open(fifo2, O_RDONLY);
+            //fd2 = open(fifo2, O_RDONLY);
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Write Success Byte Size: %s\n", writeByte);
         } else

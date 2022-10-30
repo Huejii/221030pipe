@@ -26,7 +26,17 @@ int main()
 
     while (1)
     {
-        fd = open(fifo1,O_RDONLY);
+        if(fd = open(fifo1, O_RDONLY) < 0)
+        {
+            perror("open error : ");
+            exit(0);
+        }
+        if(fd2 = open(fifo2, O_RWONLY) < 0)
+        {
+            perror("open error : ");
+            exit(0);
+        }
+        //fd = open(fifo1,O_RDONLY);
         char filename[512] = "";
         char rwType[512] = "";
         char writeString[512] = "";
@@ -42,6 +52,7 @@ int main()
         read(fd, filename, 512);
         printf("read file name: %s\n", filename);
 
+
         read(fd, rwType, 512);
         printf("read rw Type: %s\n", rwType);
 
@@ -55,7 +66,7 @@ int main()
             fread(getFileString, atoi(readByteSize), 1, fp);
             printf("Success get String: %s\n", getFileString);
             close(fd);
-            fd2 = open(fifo2,O_WRONLY);
+            //fd2 = open(fifo2,O_WRONLY);
             write(fd2, getFileString,  strlen(getFileString)+1);
             close(fd2);
 
@@ -63,14 +74,14 @@ int main()
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
-            
+
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
             close(fd);
             //추가 필요: write string 바이트 write하기
             sprintf(writeByte, "%ld", strlen(writeString));
             printf("Write String Byte Size: %s\n", writeByte);
-            fd2 = open(fifo2,O_WRONLY);
+            //fd2 = open(fifo2,O_WRONLY);
             write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
 
             char temp[512] = "okay";
