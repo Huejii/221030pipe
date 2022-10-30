@@ -63,7 +63,6 @@ int main()
             
             read(fd2, getFileString, strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
-            printf("%s\n");
         } 
         else if (strcmp(rwType,"W")==0)
         {
@@ -73,13 +72,12 @@ int main()
             // 아래 추가: read 쓴 데이터 string길이 받기
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Success Write Byte Size: %s", writeByte);
-            printf("%s\n");
-        
         }else
         {
             printf("오류");
         }
         char temp[512];
+        read(fd2, temp, sizeof(temp));
         read(fd2, temp, sizeof(temp));
 
         // Print the read message
