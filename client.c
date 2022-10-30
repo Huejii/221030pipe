@@ -62,7 +62,7 @@ int main()
             write(fd, readByteSize, strlen(readByteSize)+1);
             
             read(fd2, getFileString, strlen(getFileString)+1);
-            printf("Success get String: %s\n", getFileString);
+            printf("Success get String: %s%s\n", getFileString);
         } 
         else if (strcmp(rwType,"W")==0)
         {
@@ -71,7 +71,7 @@ int main()
             write(fd, writeString, strlen(writeString)+1);
             // 아래 추가: read 쓴 데이터 string길이 받기
             read(fd2, writeByte,  strlen(writeByte)+1);
-            printf("Write Success Byte Size: %s", writeByte);
+            printf("Success Write Byte Size: %s%s", writeByte);
             printf("\n");
         
         }else
