@@ -126,9 +126,6 @@ int main()
             /*FIFO close*/
             close(fd);
             close(fd2);
-
-            unlink(fifo1);
-            unlink(fifo2);
         }
         // parent 수행(wait child)
         else
@@ -138,6 +135,8 @@ int main()
             wait(&status); // child 종료 wait
             printf("status %d\n", status); // status 출력
             printf("Child Complete\n");   // child 수행 및 응답 완료 메세지 출력
+            unlink(fifo1);
+            unlink(fifo2);
         }
     }
     return 0;

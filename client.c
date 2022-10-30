@@ -97,9 +97,6 @@ int main()
         /*FIFO close*/
         close(fd);
         close(fd2);
-
-        unlink(fifo1);
-        unlink(fifo2);
     }
     return 0;
 }
