@@ -49,7 +49,7 @@ int main()
             fgets(readByteSize, 512, stdin);
             write(fd2, readByteSize, strlen(readByteSize)+1);
             read(fd2, getFileString,  strlen(getFileString)+1);
-            printf("Success get String: %s\n", getFileString)
+            printf("Success get String: %s\n", getFileString);
         } else if (rwType == "W")
         {
             write(fd, filename, strlen(filename)); //파일명에 +1빼버림
