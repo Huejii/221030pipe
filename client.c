@@ -45,6 +45,11 @@ int main()
 
         printf("Filename:");
         fgets(filename, 512, stdin);
+        if(!filename)
+        {
+            printf("프로그램을 종료합니다.");
+            break;
+        }
         filename[strlen(filename) - 1] = '\0';
         write(fd, filename, strlen(filename)+1);
 

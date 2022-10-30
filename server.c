@@ -46,11 +46,6 @@ int main()
         char temp[512] = "";
 
         read(fd, filename, 512);
-        if(!filename)
-        {
-            printf("프로그램을 종료합니다.");
-            break;
-        }
         printf("read file name: %s\n", filename);
 
 
