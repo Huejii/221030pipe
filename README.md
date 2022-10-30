@@ -1,5 +1,4 @@
 # Assignment1: Named Pipe
-## 경제학과 201821860
 
 1. 실행환경: 
 - 
