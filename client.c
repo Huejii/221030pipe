@@ -62,7 +62,10 @@ int main()
             close(fd);
             fd2 = open(fifo2, O_RDONLY);
             read(fd2, getFileString, strlen(getFileString)+1);
-            printf("Success get String: %s\n", getFileString);
+            printf("Success get String: %s", getFileString);
+            char temp[512];
+            read(fd2, temp, sizeof(temp));
+            printf("%s\n", temp);
         } 
         else if (strcmp(rwType,"W")==0)
         {
@@ -73,15 +76,17 @@ int main()
             fd2 = open(fifo2, O_RDONLY);
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Success Write Byte Size: %s", writeByte);
+            //이래는 오류땜에 추가
+            char temp[512];
+            read(fd2, temp, sizeof(temp));
+            printf("%s\n", temp);
         }else
         {
             printf("오류");
         }
-        char temp[512];
-        read(fd2, temp, sizeof(temp));
 
         // Print the read message
-        printf("Server sent: %s\n", temp);
+        printf("%s\n", temp);
         close(fd2);
     }
     return 0;
