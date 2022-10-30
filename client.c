@@ -45,13 +45,13 @@ int main()
 
         printf("Filename:");
         fgets(filename, 512, stdin);
-        if(!filename)
-        {
-            printf("프로그램을 종료합니다.");
-            break;
-        }
         filename[strlen(filename) - 1] = '\0';
         write(fd, filename, strlen(filename)+1);
+        sleep(1);
+        if(strcmp(filename, ""))
+        {
+            break;
+        }
 
         printf("R/W:");
         fgets(rwType, 512, stdin);

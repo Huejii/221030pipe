@@ -46,7 +46,7 @@ int main()
         char temp[512] = "";
 
         read(fd, filename, 512);
-        if(!filename)
+        if(strcmp(filename, ""))
         {
             break;
         }
