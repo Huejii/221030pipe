@@ -79,7 +79,7 @@ int main()
         }else
         {
             /* R/W 입력 오류 처리 */
-            printf("RWtype 오류");
+            printf("RWtype 오류\n");
             exit(1);
         }
         /*FIFO close*/
