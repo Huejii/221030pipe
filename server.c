@@ -64,7 +64,7 @@ int main()
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
             //추가 필요: write string 바이트 write하기
-            writeByte = itoa(strlen(writeString));
+            writeByte = _itoa(strlen(writeString));
             printf("Write String Byte Size: %s\n", writeByte);
             write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
 
