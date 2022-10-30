@@ -75,7 +75,7 @@ int main()
             printf("\n");
         
         }else
-        {}
+        {
             printf("오류");
         }
         char temp[512];
