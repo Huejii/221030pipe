@@ -1,7 +1,6 @@
 # Assignment1: Named Pipe
 
 1. 실행환경: 
-- 
 - oracle VM virtual Box ubuntu에서 실행하였다.
 - server와 client를 서로 다른 터미널에서 실행하였다.
 
