@@ -71,10 +71,11 @@ int main()
             write(fd, writeString, strlen(writeString)+1);
             // 아래 추가: read 쓴 데이터 string길이 받기
             read(fd2, writeByte,  strlen(writeByte)+1);
-            printf("Write Success Byte Size: %s\n", writeByte);
+            printf("Write Success Byte Size: %s", writeByte);
+            printf("\n");
         
         }else
-        {
+        {}
             printf("오류");
         }
         char temp[512];
