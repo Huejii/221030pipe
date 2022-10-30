@@ -10,13 +10,12 @@ int main()
 {
     int fd;
     int fd2;
-    int nonexit=1;
 
     // FIFO path
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
 
-    while (nonexit)
+    while (1)
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         // if(fd = open(fifo1, O_WRONLY) < 0)
@@ -46,7 +45,6 @@ int main()
         char writeByte[512]= "";
         char getFileString[512]="";
         char temp[512];
-        char wannaExit[10]="";
 
         printf("Filename:");
         fgets(filename, 512, stdin);
@@ -83,15 +81,10 @@ int main()
         {
             printf("오류");
         }
-
-        printf("종료하려면 0을 입력하세요:");
-        fgets(wannaExit, 10, stdin);
-        write(fd, wannaExit, strlen(wannaExit)+1);
         // Print the read message
 
         close(fd);
         close(fd2);
-        nonexit = atoi(wannaExit);
     }
     return 0;
 }
