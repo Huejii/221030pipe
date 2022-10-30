@@ -126,7 +126,7 @@ int main()
             wait(&status); // child 종료 wait
             printf("status %d\n", status); // status 출력
             printf("Child Complete\n");   // child 수행 및 응답 완료 메세지 출력
-            exit(0)
+            exit(0);
         }
     }
     return 0;
