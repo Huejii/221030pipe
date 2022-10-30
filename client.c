@@ -78,14 +78,13 @@ int main()
             printf("Success Write Byte Size: %s", writeByte);
             //이래는 오류땜에 추가
             read(fd2, temp, sizeof(temp));
-            printf("%s\n", temp);
+            printf("%s\n", temp); //나눠짐 자꾸...
         }else
         {
             printf("오류");
         }
 
         // Print the read message
-        printf("%s\n", temp);
         close(fd2);
     }
     return 0;
