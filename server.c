@@ -96,6 +96,10 @@ int main()
                 read(fd, readByteSize, 512);   // 읽을 데이터 바이트 수 read
                 printf("read Byte Size: %s\n",readByteSize);   // read한 읽을 데이터 바이트 수 출력
 	            fp = fopen(filename, "r");     // read 용으로 파일 open
+                if (fp ==NULL) {
+                    fprintf(stderr, "errno: %d\n", errno);
+                    exit(1);
+                }
                 fread(getFileString, atoi(readByteSize), 1, fp);   // 파일로부터 readByteSize만큼 데이터 읽어 getFileString에 입력
                 printf("Success get String: %s\n", getFileString); // 읽기에 성공한 데이터 string 출력
                 write(fd2, getFileString,  strlen(getFileString)+1); // client에 보낼 데이터 string write
