@@ -29,7 +29,6 @@ int main()
         //     exit(0);
         // }
         fd = open(fifo1, O_WRONLY);
-        fd2 = open(fifo2, O_RDONLY);
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
@@ -60,7 +59,8 @@ int main()
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd, readByteSize, strlen(readByteSize)+1);
-            
+            close(fd);
+            fd2 = open(fifo2, O_RDONLY);
             read(fd2, getFileString, strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
         } 
@@ -70,6 +70,7 @@ int main()
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
             // 아래 추가: read 쓴 데이터 string길이 받기
+            fd2 = open(fifo2, O_RDONLY);
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Success Write Byte Size: %s", writeByte);
         }else
@@ -81,9 +82,6 @@ int main()
 
         // Print the read message
         printf("Server sent: %s\n", temp);
-        read(fd2, temp, sizeof(temp));
-        printf("Server sent: %s\n", temp);
-        close(fd);
         close(fd2);
     }
     return 0;
