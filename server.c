@@ -97,7 +97,7 @@ int main()
                 printf("read Byte Size: %s\n",readByteSize);   // read한 읽을 데이터 바이트 수 출력
 	            fp = fopen(filename, "r");     // read 용으로 파일 open
                 if (fp ==NULL) {
-                    fprintf(stderr, "errno: %d\n", errno);
+                    printf("존재하지 않는 파일입니다.\n");
                     exit(1);
                 }
                 fread(getFileString, atoi(readByteSize), 1, fp);   // 파일로부터 readByteSize만큼 데이터 읽어 getFileString에 입력
