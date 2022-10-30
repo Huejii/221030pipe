@@ -19,14 +19,14 @@ int main()
     pid_t pid;
 
     /* FIFO 경로에 FIFO 생성 (성공시 0 반환, 실패시 -1 반환) */
-    // if (mkfifo(fifo1, 0666) == -1) {
-    //     fprintf(stderr, "Pipe Failed");
-    //     return 1;
-    // }
-    // if (mkfifo(fifo2, 0666) == -1) {
-    //     fprintf(stderr, "Pipe Failed");
-    //     return 1;
-    // }
+    if (mkfifo(fifo1, 0666) == -1) {
+        fprintf(stderr, "Pipe Failed");
+        return 1;
+    }
+    if (mkfifo(fifo2, 0666) == -1) {
+        fprintf(stderr, "Pipe Failed");
+        return 1;
+    }
     mkfifo(fifo1, 0666);
     mkfifo(fifo2, 0666);
 
@@ -143,6 +143,5 @@ int main()
             unlink(fifo1);
             unlink(fifo2);
         }
-    }
     return 0;
 }
