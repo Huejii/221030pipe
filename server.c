@@ -31,7 +31,7 @@ int main()
             perror("open error : ");
             exit(0);
         }
-        if(fd2 = open(fifo2, O_RWONLY) < 0)
+        if(fd2 = open(fifo2, O_WRONLY) < 0)
         {
             perror("open error : ");
             exit(0);
