@@ -43,6 +43,7 @@ int main()
         char readByteSize[512] = "";
         char writeByte[512]= "";
         char getFileString[512]="";
+        char temp[512];
 
         printf("Filename:");
         fgets(filename, 512, stdin);
@@ -63,7 +64,6 @@ int main()
             fd2 = open(fifo2, O_RDONLY);
             read(fd2, getFileString, strlen(getFileString)+1);
             printf("Success get String: %s", getFileString);
-            char temp[512];
             read(fd2, temp, sizeof(temp));
             printf("%s\n", temp);
         } 
@@ -77,7 +77,6 @@ int main()
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Success Write Byte Size: %s", writeByte);
             //이래는 오류땜에 추가
-            char temp[512];
             read(fd2, temp, sizeof(temp));
             printf("%s\n", temp);
         }else
