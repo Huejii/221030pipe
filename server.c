@@ -39,14 +39,14 @@ int main()
         fd2 = open(fifo2,O_WRONLY);
 
         /* 성공시 0 반환, 실패시 -1 반환 */
-        // if (fd == -1) {
-        //     fprintf(stderr, "Pipe Failed");
-        //     return 1;
-        // }
-        // if (fd2 == -1) {
-        //     fprintf(stderr, "Pipe Failed");
-        //     return 1;
-        // }
+        if (fd == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
+        if (fd2 == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
 
 
 
@@ -95,11 +95,6 @@ int main()
                 /* 파일 엑세스 타입이 Read일 때 */
                 read(fd, readByteSize, 512);   // 읽을 데이터 바이트 수 read
                 printf("read Byte Size: %s\n",readByteSize);   // read한 읽을 데이터 바이트 수 출력
-	            // fp = fopen(filename, "r");     // read 용으로 파일 open
-                // if (fp == NULL) {
-                //     printf("존재하지 않는 파일입니다.\n");
-                //     exit(1);
-            
                 }
                 if ( (fp = fopen(filename, "r")) == NULL) {
                     fprintf(stderr, "존재하지 않는 파일입니다.\n");
