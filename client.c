@@ -30,6 +30,14 @@ int main()
         // }
         fd = open(fifo1, O_WRONLY);
         fd2 = open(fifo2, O_RDONLY);
+        if (pipe(fd) == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
+        if (pipe(fd2) == -1) {
+            fprintf(stderr, "Pipe Failed");
+            return 1;
+        }
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
