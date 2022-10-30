@@ -16,7 +16,7 @@ int main()
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
 
-    while (nonExit)
+    while (nonexit)
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         // if(fd = open(fifo1, O_WRONLY) < 0)
@@ -83,7 +83,7 @@ int main()
         {
             printf("오류");
         }
-        
+
         printf("종료하려면 0을 입력하세요:");
         fgets(wannaExit, 10, stdin);
         write(fd, wannaExit, strlen(wannaExit)+1);
