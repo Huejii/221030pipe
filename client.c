@@ -43,14 +43,14 @@ int main()
         fgets(rwType, 512, stdin);
         write(fd2, rwType, strlen(rwType)+1);
 
-        if (rwType == "R")
+        if (0==strcmp(rwType,"R"))
         {
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd2, readByteSize, strlen(readByteSize)+1);
             read(fd2, getFileString,  strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
-        } else if (rwType == "W")
+        } else if (0==strcmp(rwType,"W"))
         {
             write(fd, filename, strlen(filename)); //파일명에 +1빼버림
             write(fd, rwType, strlen(rwType)+1);

@@ -47,7 +47,7 @@ int main()
         printf("rw Type: %s\n", rwType);
 
         FILE *fp;
-        if(rwType == "R")
+        if(0==strcmp(rwType,"R"))
         {
             read(fd, readByteSize, 512);
             printf("Byte Size: %s\n",readByteSize);
