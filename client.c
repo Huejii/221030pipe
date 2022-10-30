@@ -78,9 +78,10 @@ int main()
         }
         char temp[512];
         read(fd2, temp, sizeof(temp));
-        read(fd2, temp, sizeof(temp));
 
         // Print the read message
+        printf("Server sent: %s\n", temp);
+        read(fd2, temp, sizeof(temp));
         printf("Server sent: %s\n", temp);
         close(fd);
         close(fd2);
