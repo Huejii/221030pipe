@@ -18,17 +18,18 @@ int main()
     while (1)
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
-        if(fd = open(fifo1, O_WRONLY) < 0)
-        {
-            perror("open error : ");
-            exit(0);
-        }
-        if(fd2 = open(fifo2, O_RDONLY) < 0)
-        {
-            perror("open error : ");
-            exit(0);
-        }
-        //fd = open(fifo1, O_WRONLY);
+        // if(fd = open(fifo1, O_WRONLY) < 0)
+        // {
+        //     perror("open error : ");
+        //     exit(0);
+        // }
+        // if(fd2 = open(fifo2, O_RDONLY) < 0)
+        // {
+        //     perror("open error : ");
+        //     exit(0);
+        // }
+        fd = open(fifo1, O_WRONLY);
+        fd2 = open(fifo2, O_RDONLY);
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
