@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 
 
@@ -69,7 +70,6 @@ int main()
         printf("read rw Type: %s\n", rwType);
 
         //child fork
-        int status;
         pid = fork();
 
         if (pid < 0) {
@@ -111,13 +111,17 @@ int main()
 
             close(fd);
             close(fd2);
+
+            sleep(5);
         }
         else
         {
+            int status;
             printf("Parent pid: %d\n", getpid());
             wait(&status);
-            printf("status %d\n, status");
+            printf("status %d\n", status);
             printf("Child Complete");
+            exit(0);
         }
 
 
