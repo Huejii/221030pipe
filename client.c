@@ -10,12 +10,13 @@ int main()
 {
     int fd;
     int fd2;
+    int wannaExit=1;
 
     // FIFO path
     char * fifo1 = "/tmp/fifo1";
     char * fifo2 = "/tmp/fifo2";
 
-    while (1)
+    while (wannaExit)
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         // if(fd = open(fifo1, O_WRONLY) < 0)
@@ -90,8 +91,6 @@ int main()
         int wannaExit;
         printf("종료하려면 0을 입력하세요:");
         scanf("%d", &wannaExit);
-        if(!wannaExit)
-            break;
     }
     return 0;
 }
