@@ -36,7 +36,7 @@ int main()
 
         printf("Filename:");
         scanf("%s", filename);
-        write(fd, filename, strlen(filename));
+        write(fd, filename, strlen(filename)+1);
 
         printf("R/W:");
         fgets(rwType, 512, stdin);
@@ -55,8 +55,8 @@ int main()
             printf("Success get String: %s\n", getFileString);
         } else if (rwType == "W")
         {
-            write(fd, filename, strlen(filename)+1); //파일명에 +1빼버림
-            write(fd, rwType, strlen(rwType)+1);
+            //write(fd, filename, strlen(filename)+1); //파일명에 +1빼버림
+            //write(fd, rwType, strlen(rwType)+1);
 
             printf("Write String:");
             fgets(writeString, 512, stdin);
