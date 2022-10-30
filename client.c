@@ -88,11 +88,11 @@ int main()
         printf("종료하려면 0을 입력하세요:");
         fgets(wannaExit, 10, stdin);
         write(fd, wannaExit, strlen(wannaExit)+1);
-        nonexit = atoi(wannaExit);
         // Print the read message
 
         close(fd);
         close(fd2);
+        nonexit = atoi(wannaExit);
     }
     return 0;
 }

@@ -14,6 +14,7 @@ int main()
 
     int fd;
     int fd2;
+    int nonexit=1;
 
     // FIFO path
     char * fifo1 = "/tmp/fifo1";
@@ -24,7 +25,7 @@ int main()
     mkfifo(fifo1, 0666);
     mkfifo(fifo2, 0666);
 
-    while (1)
+    while (nonexit)
     {
         // if(fd = open(fifo1, O_RDONLY) < 0)
         // {
@@ -89,12 +90,13 @@ int main()
             printf("오류\n");
         }
         fclose(fp);
-
+        
+        read(fd2, wannaExit, strlen(wannaExit)+1);
         printf("종료여부: %s\n", wannaExit);
-        write(fd2, wannaExit, strlen(wannaExit)+1);
 
         close(fd);
         close(fd2);
+        nonexit = atoi(wannaExit);
     }
     return 0;
 }
