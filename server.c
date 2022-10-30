@@ -70,7 +70,7 @@ int main()
             write(fd2, getFileString,  strlen(getFileString)+1);
             close(fd2);
 
-        } else
+        } else if(rwType == "W")
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
