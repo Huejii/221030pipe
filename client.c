@@ -55,15 +55,16 @@ int main()
         rwType[strlen(rwType) - 1] = '\0';
         write(fd, rwType, strlen(rwType)+1);
 
-        if (strcmp(rwType,"R"))
+        if (strcmp(rwType,"R")==0)
         {
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd, readByteSize, strlen(readByteSize)+1);
             
-            read(fd2, getFileString,  strlen(getFileString)+1);
+            read(fd2, getFileString, strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
-        } else if (strcmp(rwType,"W"))
+        } 
+        else if (strcmp(rwType,"W")==0)
         {
             printf("Write String:");
             fgets(writeString, 512, stdin);

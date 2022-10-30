@@ -58,11 +58,11 @@ int main()
         printf("read rw Type: %s\n", rwType);
 
         FILE *fp;
-        if(strcmp(rwType,"R"))
+        if(strcmp(rwType,"R")==0)
         {
             read(fd, readByteSize, 512);
             printf("read Byte Size: %s\n",readByteSize);
-	        fp = fopen(filename, "R");
+	        fp = fopen(filename, "r");
             //아래 추가: 바이트 수 만큼 파일읽고 읽은 것 write하기
             fread(getFileString, atoi(readByteSize), 1, fp);
             printf("Success get String: %s\n", getFileString);
@@ -70,7 +70,8 @@ int main()
             write(fd2, getFileString,  strlen(getFileString)+1);
             close(fd2);
 
-        } else if(strcmp(rwType,"W"))
+        } 
+        else if(strcmp(rwType,"W")==0)
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
