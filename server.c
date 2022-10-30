@@ -6,7 +6,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#define FIFO_PERMS (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
 
 
 int main()
@@ -21,12 +20,13 @@ int main()
     pid_t pid;
 
     /* FIFO 경로에 FIFO 생성 (성공시 0 반환, 실패시 -1 반환) */
-    if (mkfifo(fifo1, FIFO_PERMS) == -1) 
+    if (mkfifo(fifo1, 0666) == -1) 
     {
         fprintf(stderr, "make fifo1 Failed");
         return 1;
     }
-    if (mkfifo(fifo2, FIFO_PERMS) == -1) {
+    
+    if (mkfifo(fifo2, 0666) == -1) {
         fprintf(stderr, "make fifo2 Failed");
         return 1;
     }
