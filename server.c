@@ -81,7 +81,6 @@ int main()
             //아래 추가: write string 바이트 write하기
             sprintf(writeByte, "%ld", strlen(writeString));
             printf("Write String Byte Size: %s\n", writeByte);
-            writeByte[strlen(writeByte) - 1] = '\0';
             write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
 
             char temp[512] = "okay";
