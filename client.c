@@ -20,6 +20,7 @@ int main()
         /* FIFO open. client는 fifo1에서 write only, fifo2에서 read only */
         fd = open(fifo1, O_WRONLY);
         fd2 = open(fifo2, O_RDONLY);
+        /* 성공시 0 반환, 실패시 -1 반환 */
         if (fd == -1) {
             fprintf(stderr, "Pipe Failed");
             return 1;
@@ -36,7 +37,7 @@ int main()
         char readByteSize[512] = "";  // 사용자가 read 요청한 데이터 byte 수
         char getFileString[512]="";   // 사용자가 read 요청한 데이터 string
         char temp[512] = "";
-        
+
         /* 파일명 입력 받기 */
         printf("Filename:");
         fgets(filename, 512, stdin);
