@@ -26,6 +26,7 @@ int main()
 
     while (1)
     {
+        fd = open(fifo1,O_RDONLY);
         char filename[512] = "";
         char rwType[512] = "";
         char writeString[512] = "";
@@ -37,7 +38,6 @@ int main()
         //fd = open(fifo1,O_RDONLY);
         //read(fd, filename, 512);
         //printf("file name: %s\n", filename);
-        fd = open(fifo1,O_RDONLY);
 
         read(fd, filename, 512);
         printf("read file name: %s\n", filename);
@@ -63,6 +63,7 @@ int main()
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
+            
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
             close(fd);
