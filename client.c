@@ -37,14 +37,14 @@ int main()
 
         printf("Filename:");
         fgets(filename, 512, stdin);
+        write(fd2, filename, strlen(filename))
 
         printf("R/W:");
         fgets(rwType, 512, stdin);
+        write(fd2, rwType, strlen(rwType)+1);
 
         if (rwType == "R")
         {
-            write(fd2, filename, strlen(filename)); //파일명에 +1빼버림
-            write(fd2, rwType, strlen(rwType)+1);
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd2, readByteSize, strlen(readByteSize)+1);
