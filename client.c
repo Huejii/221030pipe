@@ -48,7 +48,7 @@ int main()
         filename[strlen(filename) - 1] = '\0';
         write(fd, filename, strlen(filename)+1);
         sleep(1);
-        if(strcmp(filename, ""))
+        if(strcmp(filename, "")==0)
         {
             break;
         }

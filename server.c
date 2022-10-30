@@ -46,7 +46,7 @@ int main()
         char temp[512] = "";
 
         read(fd, filename, 512);
-        if(strcmp(filename, ""))
+        if(strcmp(filename, "")==0)
         {
             break;
         }
@@ -91,14 +91,13 @@ int main()
             else
             {
                 printf("오류\n");
+                exit(0);
             }
 
             fclose(fp);
 
             close(fd);
             close(fd2);
-
-            exit(0);
         }
         else
         {
