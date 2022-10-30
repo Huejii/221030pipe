@@ -60,8 +60,6 @@ int main()
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd, readByteSize, strlen(readByteSize)+1);
-
-            close(fd);
             
             read(fd2, getFileString,  strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
@@ -70,8 +68,6 @@ int main()
             printf("Write String:");
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
-
-            close(fd);
             // 아래 추가: read 쓴 데이터 string길이 받기
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Write Success Byte Size: %s\n", writeByte);
@@ -83,6 +79,7 @@ int main()
 
         // Print the read message
         printf("Server sent: %s\n", temp);
+        close(fd);
         close(fd2);
     }
     return 0;

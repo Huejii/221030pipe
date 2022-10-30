@@ -77,7 +77,6 @@ int main()
 
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
-            close(fd);
             //아래 추가: write string 바이트 write하기
             sprintf(writeByte, "%ld", strlen(writeString));
             printf("Write String Byte Size: %s\n", writeByte);
@@ -85,6 +84,7 @@ int main()
 
             char temp[512] = "okay";
             write(fd2, temp, strlen(temp)+1);
+            close(fd);
             close(fd2);
         }
             fclose(fp);
