@@ -39,14 +39,14 @@ int main()
         fd2 = open(fifo2,O_WRONLY);
 
         /* 성공시 0 반환, 실패시 -1 반환 */
-        if (fd == -1) {
-            fprintf(stderr, "Pipe Failed");
-            return 1;
-        }
-        if (fd2 == -1) {
-            fprintf(stderr, "Pipe Failed");
-            return 1;
-        }
+        // if (fd == -1) {
+        //     fprintf(stderr, "Pipe Failed");
+        //     return 1;
+        // }
+        // if (fd2 == -1) {
+        //     fprintf(stderr, "Pipe Failed");
+        //     return 1;
+        // }
 
 
 
@@ -126,6 +126,7 @@ int main()
             /*FIFO close*/
             close(fd);
             close(fd2);
+
             unlink(fifo1);
             unlink(fifo2);
         }
