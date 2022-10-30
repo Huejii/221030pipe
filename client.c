@@ -50,6 +50,7 @@ int main()
         sleep(1);
         if(strcmp(filename, "")==0)
         {
+            printf("filename 입력 오류\n");
             break;
         }
 

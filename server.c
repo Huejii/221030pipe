@@ -48,6 +48,7 @@ int main()
         read(fd, filename, 512);
         if(strcmp(filename, "")==0)
         {
+            printf("filename 입력 오류\n");
             break;
         }
         printf("read file name: %s\n", filename);
@@ -90,8 +91,8 @@ int main()
             }
             else
             {
-                printf("오류\n");
-                exit(0);
+                printf("R/W Type 입력 오류\n");
+                exit(1);
             }
 
             fclose(fp);
@@ -106,7 +107,6 @@ int main()
             wait(&status);
             printf("status %d\n", status);
             printf("Child Complete");
-            exit(0);
         }
     }
     return 0;
