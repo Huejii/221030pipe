@@ -35,7 +35,7 @@ int main()
         char getFileString[512]="";
 
         printf("Filename:");
-        scanf("%s", filename, 512);
+        scanf("%s", filename);
         write(fd, filename, strlen(filename));
 
         printf("R/W:");
