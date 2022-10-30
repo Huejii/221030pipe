@@ -19,7 +19,7 @@ int main()
     {
         // FIFO 쓰기 전용으로 열기 (서버로 보내기)
         fd = open(fifo1, O_WRONLY);
-
+        fd2 = open(fifo2, O_RDONLY);
         /*
          TODO 유저에게 묻기로 수정 시작
             1. 파일명 묻기
@@ -32,6 +32,8 @@ int main()
         char rwType[512] = "";
         char writeString[512] = "";
         char readByteSize[512] = "";
+        char writeByte[512]= "";
+        char getFileString[512]="";
 
         printf("Filename:");
         fgets(filename, 512, stdin);
@@ -39,29 +41,32 @@ int main()
         printf("R/W:");
         fgets(rwType, 512, stdin);
 
-        if(rwType == "W")
+        if (rwType == "R")
         {
-            fd = open(fifo1, O_WRONLY);
-            write(fd, filename, strlen(filename)+1);
-            write(fd, rwType, strlen(rwType)+1);
-            printf("Write String:");
-            fgets(writeString, 512, stdin);
-            write(fd, writeString, strlen(writeString)+1);
-        } else if (rwType == "R")
-        {
-            fd2 = open(fifo2, O_RDONLY);
-            write(fd2, filename, strlen(filename)+1);
+            write(fd2, filename, strlen(filename)); //파일명에 +1빼버림
             write(fd2, rwType, strlen(rwType)+1);
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
             write(fd2, readByteSize, strlen(readByteSize)+1);
+            read(fd2, getFileString,  strlen(getFileString)+1);
+            printf("Success get String: %s\n", getFileString)
+        } else if (rwType == "W")
+        {
+            write(fd, filename, strlen(filename)); //파일명에 +1빼버림
+            write(fd, rwType, strlen(rwType)+1);
+            printf("Write String:");
+            fgets(writeString, 512, stdin);
+            write(fd, writeString, strlen(writeString)+1);
+            // 추가 필요: read 쓴 데이터 string길이 받기
+            read(fd2, writeByte,  strlen(writeByte)+1);
+            printf("Write Success Byte Size: %s\n", writeByte);
         } else
             exit(1);
         //FIFO 닫기
         close(fd);
 
         // Open FIFO for Read only
-        fd2 = open(fifo2, O_RDONLY);
+        //fd2 = open(fifo2, O_RDONLY);
 
         // Read from FIFO
 
