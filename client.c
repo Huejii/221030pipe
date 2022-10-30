@@ -61,33 +61,22 @@ int main()
             write(fd, readByteSize, strlen(readByteSize)+1);
 
             close(fd);
-
-            //fd2 = open(fifo2, O_RDONLY);
+            
             read(fd2, getFileString,  strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
         } else if (rwType == "W")
         {
-            //write(fd, filename, strlen(filename)+1); //파일명에 +1빼버림
-            //write(fd, rwType, strlen(rwType)+1);
-
             printf("Write String:");
             fgets(writeString, 512, stdin);
             write(fd, writeString, strlen(writeString)+1);
 
             close(fd);
-            // 추가 필요: read 쓴 데이터 string길이 받기
-            //fd2 = open(fifo2, O_RDONLY);
+            // 아래 추가: read 쓴 데이터 string길이 받기
             read(fd2, writeByte,  strlen(writeByte)+1);
             printf("Write Success Byte Size: %s\n", writeByte);
-        } else
-            exit(1);
-        //FIFO 닫기
-
-        // Open FIFO for Read only
-        //fd2 = open(fifo2, O_RDONLY);
-
-        // Read from FIFO
-
+        
+        }
+        printf("WHY");
         char temp[512];
         read(fd2, temp, sizeof(temp));
 

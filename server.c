@@ -63,11 +63,10 @@ int main()
             read(fd, readByteSize, 512);
             printf("read Byte Size: %s\n",readByteSize);
 	        fp = fopen(filename, "R");
-            //추가 필요: 바이트 수 만큼 파일읽고 읽은 것 write하기
+            //아래 추가: 바이트 수 만큼 파일읽고 읽은 것 write하기
             fread(getFileString, atoi(readByteSize), 1, fp);
             printf("Success get String: %s\n", getFileString);
             close(fd);
-            //fd2 = open(fifo2,O_WRONLY);
             write(fd2, getFileString,  strlen(getFileString)+1);
             close(fd2);
 
@@ -79,10 +78,9 @@ int main()
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
             close(fd);
-            //추가 필요: write string 바이트 write하기
+            //아래 추가: write string 바이트 write하기
             sprintf(writeByte, "%ld", strlen(writeString));
             printf("Write String Byte Size: %s\n", writeByte);
-            //fd2 = open(fifo2,O_WRONLY);
             write(fd2, writeByte,  strlen(writeByte)+1); //수정필요
 
             char temp[512] = "okay";
