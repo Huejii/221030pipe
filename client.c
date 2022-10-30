@@ -86,6 +86,12 @@ int main()
 
         // Print the read message
         close(fd2);
+
+        int wannaExit;
+        printf("종료하려면 0을 입력하세요:");
+        scanf("%d", &wannaExit);
+        if(!wannaExit)
+            break;
     }
     return 0;
 }
