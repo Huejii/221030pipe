@@ -48,7 +48,6 @@ int main()
         read(fd, filename, 512);
         if(strcmp(filename, "")==0)
         {
-            printf("filename 입력 오류\n");
             break;
         }
         printf("read file name: %s\n", filename);
@@ -106,7 +105,7 @@ int main()
             printf("Parent pid: %d\n", getpid());
             wait(&status);
             printf("status %d\n", status);
-            printf("Child Complete");
+            printf("Child Complete\n");
         }
     }
     return 0;
