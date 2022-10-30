@@ -67,8 +67,7 @@ int main()
 	        fp = fopen(filename, "r");
             //아래 추가: 바이트 수 만큼 파일읽고 읽은 것 write하기
             fread(getFileString, atoi(readByteSize), 1, fp);
-            printf("Success get String: %s", getFileString);
-            printf("\n");
+            printf("Success get String: %s\n", getFileString);
             write(fd2, getFileString,  strlen(getFileString)+1);
 
         } 
