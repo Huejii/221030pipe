@@ -37,7 +37,7 @@ int main()
         //     exit(0);
         // }
         fd = open(fifo1,O_RDONLY);
-        fd2 = open(fifo2,O_WRONLY);
+
         char filename[512] = "";
         char rwType[512] = "";
         char writeString[512] = "";
@@ -62,6 +62,8 @@ int main()
         {
             read(fd, readByteSize, 512);
             printf("read Byte Size: %s\n",readByteSize);
+            close(fd);
+            fd2 = open(fifo2,O_WRONLY);
 	        fp = fopen(filename, "r");
             //아래 추가: 바이트 수 만큼 파일읽고 읽은 것 write하기
             fread(getFileString, atoi(readByteSize), 1, fp);
@@ -74,7 +76,8 @@ int main()
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
-
+            close(fd);
+            fd2 = open(fifo2,O_WRONLY);
 	        fp = fopen(filename, "w");
 	        fputs(writeString, fp);
             //아래 추가: write string 바이트 write하기
@@ -95,7 +98,6 @@ int main()
             printf("오류\n");
         }
             fclose(fp);
-            close(fd);
             close(fd2);
         // Now open in write mode and write
         // string taken from user.
