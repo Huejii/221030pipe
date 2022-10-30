@@ -58,7 +58,7 @@ int main()
         printf("read rw Type: %s\n", rwType);
 
         FILE *fp;
-        if(rwType == "R")
+        if(strcmp(rwType,"R"))
         {
             read(fd, readByteSize, 512);
             printf("read Byte Size: %s\n",readByteSize);
@@ -70,7 +70,7 @@ int main()
             write(fd2, getFileString,  strlen(getFileString)+1);
             close(fd2);
 
-        } else if(rwType == "W")
+        } else if(strcmp(rwType,"W"))
         {
             read(fd, writeString, 512);
             printf("Write String: %s\n", writeString);
@@ -88,7 +88,7 @@ int main()
             close(fd2);
         } else
         {
-            printf("오류");
+            printf("오류\n");
         }
             fclose(fp);
         // Now open in write mode and write

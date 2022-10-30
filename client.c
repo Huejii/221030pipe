@@ -54,8 +54,8 @@ int main()
         fgets(rwType, 512, stdin);
         rwType[strlen(rwType) - 1] = '\0';
         write(fd, rwType, strlen(rwType)+1);
-        
-        if (rwType == "R")
+
+        if (strcmp(rwType,"R"))
         {
             printf("Byte Size:");
             fgets(readByteSize, 512, stdin);
@@ -63,7 +63,7 @@ int main()
             
             read(fd2, getFileString,  strlen(getFileString)+1);
             printf("Success get String: %s\n", getFileString);
-        } else if (rwType == "W")
+        } else if (strcmp(rwType,"W"))
         {
             printf("Write String:");
             fgets(writeString, 512, stdin);
